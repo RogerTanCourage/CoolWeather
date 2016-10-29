@@ -14,10 +14,12 @@ import java.net.URL;
 public class HttpUtil {
     public static  void sendHttpResponse(final String address,
                                          final HttpCallbackListener listener) {
+        Log.d("sendHttpResponse", "start");
         new Thread(new Runnable() {
             @Override
             public void run() {
                 HttpURLConnection connection = null;
+                Log.d("sendHttpRespone", address);
                 try {
                     Log.d("con","con");
                     URL url = new URL(address);
@@ -38,9 +40,10 @@ public class HttpUtil {
                     if(listener != null){
                         listener.onFinish(response.toString());
                     }
+                    Log.d("httpSend",address);
                 }catch (Exception e){
                     if(listener != null){
-                        Log.d("call","error");
+                        Log.e("call","error");
                         listener.onError(e);
                     }
                 }finally {
